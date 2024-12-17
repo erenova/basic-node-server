@@ -1,7 +1,22 @@
-const http = require("http");
-const fs = require("fs");
 const path = require("path");
-http
+const express = require("express");
+const app = express();
+const PORT = process.env.PORT || 8080;
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+app.get("/about", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "about.html"));
+});
+app.get("/contact", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "contact.html"));
+});
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "404.html"));
+});
+app.listen(8080);
+/* http
   .createServer((req, res) => {
     if (req.url === "/") {
       fs.readFile(
@@ -52,3 +67,4 @@ http
     }
   })
   .listen(8080);
+ */
